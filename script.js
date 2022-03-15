@@ -8,19 +8,36 @@ const textArea = document.querySelector('#text-area');
 
 
 const humanExpressions = [
-    { img: '/img/drink.jpg', text: 'Estou com sede' },
-    { img: '/img/food.jpg', text: 'Estou com fome' },
-    { img: '/img/tired.jpg', text: 'Estou cansado' },
-    { img: '/img/hurt.jpg', text: 'Estou machucado' },
-    { img: '/img/happy.jpg', text: 'Estou feliz' },
-    { img: '/img/angry.jpg', text: 'Estou com raiva' },
-    { img: '/img/sad.jpg', text: 'Estou triste' },
-    { img: '/img/scared.jpg', text: 'Estou assustado' },
-    { img: '/img/outside.jpg', text: 'Quero ir lá fora' },
-    { img: '/img/home.jpg', text: 'Quero ir pra casa' },
-    { img: '/img/school.jpg', text: 'Quero ir pra escola' },
-    { img: '/img/grandma.jpg', text: 'Quero ver a vovó' }
+    { img: 'img/drink.jpg', text: { "pt-br": 'Estou com sede', "en-us": "I'M THIRSTY" } },
+    {
+        img: 'img/food.jpg',
+        text: { "pt-br": 'Estou com fome', "en-us": "I'M HUNGRY" }
+    },
+    { img: 'img/tired.jpg', text: { "pt-br": 'Estou cansado', "en-us": "I AM TIRED" } },
+    { img: 'img/hurt.jpg', text: { "pt-br": 'Estou machucado', "en-us": "I'M HURT" } },
+    { img: 'img/happy.jpg', text: { "pt-br": 'Estou feliz', "en-us": "I'M HAPPY" } },
+    { img: 'img/angry.jpg', text: { "pt-br": 'Estou com raiva', "en-us": "I'M ANGRY" } },
+    { img: 'img/sad.jpg', text: { "pt-br": 'Estou triste', "en-us": "I'M SAD" } },
+    { img: 'img/scared.jpg', text: { "pt-br": 'Estou assustado', "en-us": "I'M SCARED" } },
+    { img: 'img/outside.jpg', text: { "pt-br": 'Quero ir lá fora', "en-us": "I WANT TO GO OUTSIDE" } },
+    { img: 'img/home.jpg', text: { "pt-br": 'Quero ir pra casa', "en-us": "I WANT TO GO HOME" } },
+    { img: 'img/school.jpg', text: { "pt-br": 'Quero ir pra escola', "en-us": "I WANT TO GO TO SCHOOL" } },
+    { img: 'img/grandma.jpg', text: { "pt-br": 'Quero ver a vovó', "en-us": "I WANT TO SEE GRANDMA" } }
 ];
+// const humanExpressions = [
+//     { img: 'img/drink.jpg', text: "I'M THIRSTY" },
+//     { img: 'img/food.jpg', text: "I'M HUNGRY" },
+//     { img: 'img/tired.jpg', text: "I AM TIRED" },
+//     { img: 'img/hurt.jpg', text: "I'M HURT" },
+//     { img: 'img/happy.jpg', text: "I'M HAPPY" },
+//     { img: 'img/angry.jpg', text: "I'M ANGRY" },
+//     { img: 'img/sad.jpg', text: "I'M SAD" },
+//     { img: 'img/scared.jpg', text: "I'M SCARED" },
+//     { img: 'img/outside.jpg', text: "I WANT TO GO OUTSIDE" },
+//     { img: 'img/home.jpg', text: "I WANT TO GO HOME" },
+//     { img: 'img/school.jpg', text: "I WANT TO GO TO SCHOOL" },
+//     { img: 'img/grandma.jpg', text: "QUERO VER A VOVÓ"}
+// ];
 
 const utterance = new SpeechSynthesisUtterance();
 
@@ -35,13 +52,15 @@ const setVoice = ({ target: { value } }) => {
 }
 
 const speakText = () => {
+    console.log(utterance);
     speechSynthesis.speak(utterance);
 }
+const lang = "en-us"
 const addExpressionBoxIntoDOM = () => {
     main.innerHTML = humanExpressions.map(({ img, text }) => `
-    <div class="expression-box" data-frase="${text}">
-        <img src="${img}"data-frase="${text}" alt="${text}">
-        <p class="info" data-frase="${text}">${text}</p>
+    <div class="expression-box" data-frase="${text[lang]}">
+        <img src="${img}"data-frase="${text[lang]}" alt="${text[lang]}">
+        <p class="info" data-frase="${text[lang]}">${text[lang]}</p>
     </div>
     `).join("");
 }
